@@ -1,0 +1,23 @@
+resume_parser_project/
+│
+├── app.py                  # Main Flask app
+├── database.db             # SQLite database (auto-generated)
+├── static/
+│   ├── css/
+│   │   └── style.css       # Custom CSS for frontend
+│   ├── js/
+│   │   └── script.js       # Custom JavaScript for frontend
+│   └── uploads/            # Folder for uploaded resumes
+├── templates/
+│   ├── index.html          # Landing page with Recruiter and Candidate options
+│   ├── login_signup.html   # Common login/signup page for both user types
+│   ├── create_account.html # Page for creating an account
+│   ├── post_job.html       # Recruiter job posting page
+│   ├── view_jobs.html      # Candidate job browsing page
+│   ├── upload_resume.html  # Resume upload page
+│   ├── job_summary.html    # Job summary for candidates
+│   └── view_candidates.html # Candidate ranking page for recruiters
+└── utils/
+    ├── parser.py           # Resume parsing script
+    ├── ranking.py          # Candidate ranking script
+    └── file_converter.py   # File conversion script

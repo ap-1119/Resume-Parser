@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Resume</title>
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"> -->
+    <style>
+        body {
+            background: linear-gradient(to right, #283c86, #45a247);
+            color: #ffffff;
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .form-container {
+            max-width: 500px;
+            width: 100%;
+            padding: 40px;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            text-align: center;
+        }
+        h2 {
+            font-size: 32px;
+            margin-bottom: 30px;
+            color: #45a247;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .input-field {
+            width: 100%;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            font-size: 18px;
+            border: none;
+            outline: none;
+            transition: all 0.3s ease-in-out;
+            cursor: pointer;
+        }
+        .input-field:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        .btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(to right, #45a247, #283c86);
+            color: #ffffff;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            border: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 5px 15px rgba(69, 162, 71, 0.5);
+            margin-top: 10px;
+        }
+        .btn:hover {
+            background: linear-gradient(to right, #283c86, #45a247);
+            transform: scale(1.05);
+        }
+        .alert {
+            text-align: center;
+            padding: 12px;
+            margin-top: 20px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .alert.success {
+            background-color: #28a745;
+            color: white;
+        }
+        .alert.danger {
+            background-color: #dc3545;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    {% include 'navbar.html' %}  <!-- Include the navigation bar -->
+    <div class="form-container">
+        <h2>Upload Your Resume</h2>
+        <form method="POST" enctype="multipart/form-data">
+            <input class="input-field" type="file" name="resume" required>
+            <button class="btn" type="submit">Upload Resume</button>
+        </form>
+    </div>
+</body>
+</html>

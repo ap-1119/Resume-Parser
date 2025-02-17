@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Jobs</title>
+    <style>
+        body {
+            background: linear-gradient(to right, #283c86, #45a247);
+            color: #ffffff;
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 60px auto;
+            padding: 50px;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+        }
+        h2 {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 40px;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: #45a247;
+            letter-spacing: 1.5px;
+        }
+        .job {
+            background: rgba(255, 255, 255, 0.1);
+            margin-bottom: 30px;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+            transition: all 0.3s ease-in-out;
+            position: relative;
+        }
+        .job:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+        }
+        .job h3 {
+            font-size: 26px;
+            font-weight: 700;
+            color: #45a247;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+        .job p {
+            font-size: 18px;
+            color: #ffffff;
+            margin-bottom: 15px;
+            font-weight: 300;
+            line-height: 1.6;
+        }
+        .btn {
+            display: inline-block;
+            padding: 14px 30px;
+            background: linear-gradient(to right, #45a247, #283c86);
+            color: #ffffff;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+            box-shadow: 0 5px 20px rgba(69, 162, 71, 0.5);
+            margin-right: 10px; /* Add some space between buttons */
+        }
+        .btn:hover {
+            background: linear-gradient(to right, #283c86, #45a247);
+            transform: scale(1.05);
+        }
+        .btn:active {
+            transform: scale(0.98);
+        }
+        .flashes {
+            list-style-type: none;
+            padding: 0;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .flashes li {
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        .flashes .success {
+            background-color: #28a745;
+            color: white;
+        }
+        .flashes .danger {
+            background-color: #dc3545;
+            color: white;
+        }
+        .button-container {
+            display: flex; /* Use flexbox to align buttons side by side */
+            justify-content: flex-start; /* Align buttons to the start */
+            margin-top: 10px; /* Add some space above the buttons */
+        }
+                /* Navigation Bar */
+                nav {
+            background-color: #1f2833;
+            padding: 10px 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        nav .navbar {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav .navbar li {
+            margin: 0 15px;
+        }
+
+        nav .navbar a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        nav .navbar a:hover {
+            background-color: #66fcf1;
+            color: #1f2833;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <ul class="navbar">
+            <li><a href="{{ url_for('index') }}">Home</a></li>
+            <li><a href="{{ url_for('login_signup') }}">Login/Signup</a></li>
+            <li><a href="{{ url_for('upload_default_resume') }}">Upload Resume</a></li>
+        </ul>
+    </nav>
+    <br>
+    <br>
+    {% if flash_messages %}
+<ul class="flashes">
+    {% for category, message in flash_messages %}
+        <li class="{{ category }}">{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+    <div class="container">
+        <h2>Available Jobs</h2>
+
+        {% for job in jobs %}
+        <div class="job">
+            <h3>{{ job.job['title'] }}</h3>
+            <p><strong>Description:</strong> {{ job.job['description'] }}</p>
+            <p><strong>Company:</strong> {{ job.job['company_name'] }}</p>
+            <p><strong>Location:</strong> {{ job.job['location'] }}</p>
+            <p><strong>Salary:</strong> Rs.{{ job.job['salary'] }} LPA</p>
+            <p><strong>Experience Required:</strong> {{ job.job['experience'] }} years</p>
+
+            <div class="button-container">
+                {% set has_applied = false %}
+                
+                {% for application in job.applications %}
+                    {% if application['candidate_id'] == session['user_id'] %}
+                        {% set has_applied = true %}
+                        <form action="{{ url_for('remove_application', application_id=application.application_id) }}" method="POST" style="display:inline;">
+                            <button type="submit" class="btn" style="background-color: #dc3545;">Remove Application</button>
+                        </form>
+                    {% endif %}
+                {% endfor %}
+
+                {% if not has_applied %}
+                    <form action="{{ url_for('apply_job', job_id=job.job['id']) }}" method="POST">
+                        <button type="submit" class="btn">Apply</button>
+                    </form>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
+
+

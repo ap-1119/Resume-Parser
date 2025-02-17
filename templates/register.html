@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account</title>
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"> -->
+    <style>
+        body {
+            background: linear-gradient(to right, #283c86, #45a247);
+            color: #ffffff;
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .form-container {
+            width: 100%;
+            max-width: 500px;
+            padding: 40px;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+        }
+        h2 {
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 30px;
+            color: #45a247;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        .input-field {
+            width: 100%;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+            border: none;
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            font-size: 18px;
+            transition: all 0.3s ease-in-out;
+            outline: none;
+        }
+        .input-field:focus {
+            border: 2px solid #45a247;
+            background: rgba(255, 255, 255, 0.2);
+        }
+        select.input-field {
+            background: rgba(255, 255, 255, 0.1);
+            color: #668571;
+        }
+        #option{
+            background-color: #070807;
+            color: aliceblue;
+        }
+        .btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(to right, #45a247, #283c86);
+            color: #ffffff;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            border: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 5px 15px rgba(69, 162, 71, 0.5);
+        }
+        .btn:hover {
+            background: linear-gradient(to right, #283c86, #45a247);
+            transform: scale(1.05);
+        }
+        .alert {
+            text-align: center;
+            padding: 12px;
+            margin-top: 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            display: none;
+        }
+        .alert.success {
+            background-color: #28a745;
+            color: white;
+        }
+        .alert.danger {
+            background-color: #dc3545;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    {% include 'navbar.html' %}  <!-- Include the navigation bar -->
+    <div class="form-container">
+        <h2>Create Account</h2>
+        <form method="POST" action="{{ url_for('register') }}">
+            <input class="input-field" type="text" name="name" placeholder="Full Name" required>
+            <input class="input-field" type="email" name="email" placeholder="Email" required>
+            <input class="input-field" type="password" name="password" placeholder="Password" required>
+            
+            <!-- Profession Selection -->
+            <select class="input-field" name="profession" required>
+                <option value="" disabled selected id="option">Select your profession</option>
+                <option value="candidate" id="option">Candidate</option>
+                <option value="recruiter" id="option">Recruiter</option>
+            </select>
+            
+            <button class="btn" type="submit">Register</button>
+        </form>
+    </div>
+</body>
+</html>

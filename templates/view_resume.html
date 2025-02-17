@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Resume</title>
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"> -->
+    <style>
+        body {
+            background: linear-gradient(to right, #283c86, #45a247);
+            color: #ffffff;
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 700px;
+            margin: 80px auto;
+            padding: 40px;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            text-align: center;
+        }
+        h2 {
+            font-size: 36px;
+            margin-bottom: 30px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #45a247;
+            letter-spacing: 1.5px;
+        }
+        .resume-detail {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+            transition: all 0.3s ease-in-out;
+            position: relative;
+            text-align: left;
+        }
+        .resume-detail:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+        .resume-detail p {
+            font-size: 18px;
+            color: #ffffff;
+            margin-bottom: 15px;
+            font-weight: 300;
+            line-height: 1.6;
+        }
+        .resume-detail strong {
+            color: #45a247;
+            font-weight: 600;
+        }
+        .btn {
+            display: inline-block;
+            padding: 14px 30px;
+            background: linear-gradient(to right, #45a247, #283c86);
+            color: #ffffff;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+            box-shadow: 0 5px 20px rgba(69, 162, 71, 0.5);
+            width: 100%;
+            margin-top: 20px;
+        }
+        .btn:hover {
+            background: linear-gradient(to right, #283c86, #45a247);
+            transform: scale(1.05);
+        }
+        .btn:active {
+            transform: scale(0.98);
+        }
+        .btn-back {
+            background-color: #0b0c0c;
+            margin-top: 10px;
+        }
+        .btn-back:hover {
+            background-color: #444;
+        }
+    </style>
+</head>
+<body>
+    {% include 'navbar.html' %}  <!-- Include the navigation bar -->
+    <div class="container">
+        <h2>Resume Details</h2>
+    
+        <!-- <div class="resume-detail">
+            <p><strong>Ranking Score:</strong> {{ ranking_score }}</p>
+            <p><strong>File Path:</strong> {{ resume.file_path }}</p>
+            Add other resume details as needed -->
+        <!-- </div> -->
+    
+        <!-- Download and Back Buttons -->
+        <a href="{{ url_for('download_resume', resume_id=resume.id) }}">
+            <button class="btn">Download Resume</button>
+        </a>
+    
+        <a href="{{ url_for('recruiter_dashboard') }}">
+            <button class="btn btn-back">Back to Dashboard</button>
+        </a>
+    </div>
+</body>
+</html>

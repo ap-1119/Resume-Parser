@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Parser</title>
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"> -->
+    <style>
+        body {
+            background: linear-gradient(to right, #283c86, #45a247);
+            font-family: 'Poppins', sans-serif;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+            padding: 40px;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            max-width: 600px;
+        }
+        h1 {
+            font-size: 42px;
+            color: #45a247;
+            margin-bottom: 20px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        p {
+            font-size: 20px;
+            color: #ddd;
+            margin-bottom: 30px;
+            line-height: 1.6;
+            font-weight: 300;
+        }
+        .btn {
+            display: inline-block;
+            background: linear-gradient(to right, #45a247, #283c86);
+            border: none;
+            color: #fff;
+            padding: 18px 40px;
+            font-size: 22px;
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+            border-radius: 50px;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 5px 15px rgba(69, 162, 71, 0.5);
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+        .btn:hover {
+            background: linear-gradient(to right, #283c86, #45a247);
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(40, 60, 134, 0.5);
+        }
+        .btn:active {
+            transform: scale(0.98);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to the Resume Parser</h1>
+        <p>Let's get you started on parsing resumes and finding your perfect match!</p>
+        <a href="{{ url_for('login_signup') }}" class="btn">Get Started</a>
+    </div>
+</body>
+</html>
