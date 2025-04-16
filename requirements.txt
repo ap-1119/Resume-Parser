@@ -25,8 +25,8 @@ joblib
 
 # Logging and utilities
 logging  # Standard library, not required in requirements.txt
-os  # Standard library
-asyncio  # Standard library
+#os  # Standard library
+#Sasyncio  # Standard library
 
 # Optional: for OCR
 pytesseract
