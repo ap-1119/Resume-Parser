@@ -21,3 +21,6 @@ resume_parser_project/
     ├── parser.py           # Resume parsing script
     ├── ranking.py          # Candidate ranking script
     └── file_converter.py   # File conversion script
+
+
+background: linear-gradient(to right, #283c86, #45a247);

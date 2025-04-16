@@ -146,20 +146,63 @@ def register():
 
     return render_template('register.html')
 
+# @app.route('/view_jobs')
+# def view_jobs():
+#     conn = get_db()
+#     cursor = conn.cursor()
+
+#     # Fetch all jobs and convert them to dictionaries
+#     cursor.execute("SELECT * FROM jobs")
+#     jobs = [dict(row) for row in cursor.fetchall()]  # Convert jobs to dictionaries
+
+#     jobs_with_applications = []
+#     for job in jobs:
+#         job_id = job['id']
+
+#         # Fetch applications for each job and convert to dictionaries
+#         cursor.execute("""
+#             SELECT applications.id as application_id, applications.candidate_id, candidates.name 
+#             FROM applications 
+#             JOIN candidates ON applications.candidate_id = candidates.id 
+#             WHERE applications.job_id = ?
+#         """, (job_id,))
+        
+#         applications = [dict(row) for row in cursor.fetchall()]  # Convert rows to dictionaries
+
+#         jobs_with_applications.append({
+#             'job': job,  # Now `job` is a proper dictionary
+#             'applications': applications
+#         })
+
+#     flash_messages = get_flashed_messages(with_categories=True)  # Get flashed messages with categories
+#     return render_template('view_jobs.html', jobs=jobs_with_applications, flash_messages=flash_messages)
+
+
 @app.route('/view_jobs')
 def view_jobs():
     conn = get_db()
     cursor = conn.cursor()
 
-    # Fetch all jobs and convert them to dictionaries
-    cursor.execute("SELECT * FROM jobs")
+    search_query = request.args.get('search', '').strip()  # Get search query from request
+
+    # Base SQL query
+    sql_query = "SELECT * FROM jobs"
+    params = []
+
+    # Modify SQL query if search query exists
+    if search_query:
+        sql_query += " WHERE title LIKE ? OR company_name LIKE ? OR location LIKE ?"
+        search_pattern = f"%{search_query}%"
+        params.extend([search_pattern, search_pattern, search_pattern])
+
+    cursor.execute(sql_query, params)
     jobs = [dict(row) for row in cursor.fetchall()]  # Convert jobs to dictionaries
 
     jobs_with_applications = []
     for job in jobs:
         job_id = job['id']
 
-        # Fetch applications for each job and convert to dictionaries
+        # Fetch applications for each job
         cursor.execute("""
             SELECT applications.id as application_id, applications.candidate_id, candidates.name 
             FROM applications 
@@ -167,15 +210,16 @@ def view_jobs():
             WHERE applications.job_id = ?
         """, (job_id,))
         
-        applications = [dict(row) for row in cursor.fetchall()]  # Convert rows to dictionaries
+        applications = [dict(row) for row in cursor.fetchall()]  # Convert to dictionaries
 
         jobs_with_applications.append({
-            'job': job,  # Now `job` is a proper dictionary
+            'job': job,  # Job as a dictionary
             'applications': applications
         })
 
-    flash_messages = get_flashed_messages(with_categories=True)  # Get flashed messages with categories
+    flash_messages = get_flashed_messages(with_categories=True)  # Get flashed messages
     return render_template('view_jobs.html', jobs=jobs_with_applications, flash_messages=flash_messages)
+
 
 @app.route('/recruiter_dashboard')
 def recruiter_dashboard():
