@@ -1,0 +1,37 @@
+# Core dependencies
+flask
+werkzeug
+
+# File handling and parsing
+python-docx
+pdfplumber
+pillow
+
+# Language detection and translation
+langdetect
+googletrans==4.0.0rc1
+
+# NLP and ML
+nltk
+spacy
+torch
+sentence-transformers
+transformers
+scikit-learn
+joblib
+
+# Database
+sqlite3  # Note: Built into Python, doesn't need to be in requirements
+
+# Logging and utilities
+logging  # Standard library, not required in requirements.txt
+os  # Standard library
+asyncio  # Standard library
+
+# Optional: for OCR
+pytesseract
+
+# Optional: Ensure nltk and spacy data
+# Add the following post-installation steps in your setup documentation:
+# python -m nltk.downloader stopwords
+# python -m spacy download en_core_web_sm
