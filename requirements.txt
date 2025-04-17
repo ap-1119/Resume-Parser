@@ -21,17 +21,17 @@ scikit-learn
 joblib
 
 # Database
-#sqlite3  # Note: Built into Python, doesn't need to be in requirements
+sqlite3  # Note: Built into Python, doesn't need to be in requirements
 
 # Logging and utilities
 logging  # Standard library, not required in requirements.txt
-#os  # Standard library
-#Sasyncio  # Standard library
+os  # Standard library
+asyncio  # Standard library
 
 # Optional: for OCR
 pytesseract
 
 # Optional: Ensure nltk and spacy data
 # Add the following post-installation steps in your setup documentation:
-#python -m nltk.downloader stopwords
-#python -m spacy download en_core_web_sm
+python -m nltk.downloader stopwords
+python -m spacy download en_core_web_sm
